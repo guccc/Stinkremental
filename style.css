@@ -24,8 +24,6 @@
 }
 
 #title{
-	/* Make visible on release */
-	visibility: hidden;
 	position: relative;
 	right: 5px;
 	text-align: right;
@@ -36,8 +34,6 @@
 }
 
 #external-links{
-	/* Make visible on release */
-	visibility: hidden;
 	position: relative;
 	left: 20px;
 	text-align: left;
