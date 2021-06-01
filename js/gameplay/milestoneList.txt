@@ -1,0 +1,48 @@
+id - name
+    requirements
+    description
+    reward
+    requirement_type
+   
+
+0 - Click
+    Move 10 meters
+    Move 10 meters
+    Manual Movement Cooldown x0.5
+    Distance
+   
+1 - Click 2: Electric Boogaloo
+    Move 25 meters
+    Move 25 meters
+    Manual Movement Cooldown x0.5
+    Distance
+   
+2 - Just keep clicking, Just keep clicking
+    Move 50 meters
+    Move 50 meters
+    Manual Movement Cooldown x0.5
+    Distance
+   
+3 - Are we there yet?
+    Move 100 meters
+    Move 100 meters
+    Manual Movement Distance +1, Manual Movement Cooldown x0.5
+    Distance
+   
+4 - no
+    Move 250 meters
+    Move 250 meters
+    Manual Movement Distance +1
+    Distance
+   
+5 - Super Saiyan Fingers
+    Move 500 meters
+    After years of training (Moving 500 meters), your finger has learnt to go beyond it's physical limitations
+    Manual Movement Cooldown Disabled
+    Distance
+
+6 - Velocity Unveiled
+    Move 1000 meters
+    Move 1000 meters
+    Unlock Velocity
+    Distance

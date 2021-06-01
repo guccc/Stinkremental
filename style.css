@@ -1,0 +1,143 @@
+/* Overall Styling */
+#game{
+	font-family: "Courier New", monospace;
+	font-size: 14px;
+}
+
+/* Status Bar */
+#status{
+	width: auto;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid black;
+	margin: 5px;
+}
+
+/* Info Bar */
+#info-bar{
+	position: fixed;
+	right: 1px;
+	bottom: 1px;
+	left: 1px;
+	margin: 0px;
+	border: 1px double black;
+}
+
+#title{
+	/* Make visible on release */
+	visibility: hidden;
+	position: relative;
+	right: 5px;
+	text-align: right;
+	line-height: 0px;
+	padding: 0px;
+	margin: 0px;
+	
+}
+
+#external-links{
+	/* Make visible on release */
+	visibility: hidden;
+	position: relative;
+	left: 20px;
+	text-align: left;
+	line-height: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+/* Position Tab Bar */
+#posBarTable{
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+.posTabLink {
+	text-decoration: none;
+	text-align: center;
+	display: inline-block;
+	background-color: #FFFFFF;
+	height: 100%;
+	width:100px;
+	padding: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	margin-bottom: 0;
+	border: 1px solid black;
+}
+
+.posTabLink:hover{
+	background-color: #EEEEEE;
+}
+
+.posTabLink:active{
+	background-color: #DDDDDD;
+}
+
+/* Position Pages */
+.posPage{
+	display: none;
+}
+
+#posContents{
+	display: none;
+}
+
+.posPage input {
+	text-decoration: none;
+	background-color: white;
+	display: inline-block;
+}
+
+/* Main Tab Bar */
+.mainTabLink {
+	border: 1px solid white;
+	color: white;
+	text-decoration: none;
+	text-align: center;
+	text-decoration-color: #FFFFFF;
+	display: inline-block;
+	background-color: #000000;
+	height: 100%;
+	width: 100px;
+	padding: 0px;
+	margin: 0px;
+}
+
+#tabs{
+	width: auto;
+	text-align: center;
+	padding: 0px;
+	background-color: lightgray;
+	margin: 0px;
+	border: 1px dashed black;
+}
+
+.mainTabLink:hover{
+	border: 1px solid blue;
+}
+
+.mainTabLink:active{
+	background-color: #333333;
+}
+
+#tabBar{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	margin-bottom: 0;	
+}
+
+#dispTab, #veloTab, #acceTab, #jerkTab, #snapTab, #cracTab, #popTab, #lockTab, #dropTab, #milestonesTab{
+	display: none;
+}
+
+.tabBarCell {
+	display: none;
+}
+
+#posTabCell, #statsTabCell, #settingsTabCell {
+	display: table-cell;
+}

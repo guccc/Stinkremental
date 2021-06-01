@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Stinkremental</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="game">
+		<!-- Status Bar to show the values of the Derivatives of Position, quantity and gain rate of resources and any other values while in other sections -->
+			<div id="status">
+				Distance Travelled: <span id="xDistance"></span> <span id="xDistanceUnit"></span>
+			</div>
+
+		<!-- Tab Bar to swap between the various sections of the game (Alternatively keybinds can be used to navigate the tabs) -->
+			<div id="tabs">
+				<table id="tabBar">
+					<tr>
+						<td class="tabBarCell" id="posTabCell"><input id="posTab" class="mainTabLink" type="button" onclick="openTab(event, 'posContents')" value="Position" /></td>
+						<td class="tabBarCell" id="milestonesTabCell"><input id="milestonesTab" class="mainTabLink" type="button" onclick="openTab(event, 'milestonesContents')" value="Milestones" /></td>
+						<td class="tabBarCell" id="settingsTabCell"><input id="settingsTab" class="mainTabLink" type="button" onclick="openTab(event, 'settingsContents')" value="Settings" /></td>
+						<td class="tabBarCell" id="statsTabCell"><input id="statsTab" class="mainTabLink" type="button" onclick="openTab(event, 'statsContents')" value="Stats" /></td>
+					</tr>
+				</table>
+			</div>
+
+		<!-- External Links, Information and Title at bottom of the page -->
+			<div id="info-bar">
+
+			<!-- Title of the Game -->
+				<div id="title">
+					<h1>Stinkremental</h1>
+					<h5>The Stinky Incremental</h5>
+				</div>
+
+
+			<!-- Links to various resources and developer socials -->
+				<div id="external-links">
+
+				</div>
+			</div>
+
+		<span class="tabContents" id="posContents">
+		<!-- Time Derivatives of Position Tab Bar -->
+			<div id="posBar">
+				<table id="posBarTable">
+					<tr>
+						<td class="tabBarCell" id="dispTabCell"><input class="posTabLink" id="dispTab" type="button" onclick="openPosPage(event, 'dispPage')" value="Displacement" /></td>
+						<td class="tabBarCell" id="veloTabCell"><input class="posTabLink" id="veloTab" type="button" onclick="openPosPage(event, 'veloPage')" value="Velocity" /></td>
+						<td class="tabBarCell" id="acceTabCell"><input class="posTabLink" id="acceTab" type="button" onclick="openPosPage(event, 'accePage')" value="Acceleration" /></td>
+						<td class="tabBarCell" id="jerkTabCell"><input class="posTabLink" id="jerkTab" type="button" onclick="openPosPage(event, 'jerkPage')" value="Jerk" /></td>
+						<td class="tabBarCell" id="snapTabCell"><input class="posTabLink" id="snapTab" type="button" onclick="openPosPage(event, 'snapPage')" value="Snap" /></td>
+						<td class="tabBarCell" id="cracTabCell"><input class="posTabLink" id="cracTab" type="button" onclick="openPosPage(event, 'cracPage')" value="Crackle" /></td>
+						<td class="tabBarCell" id="popTabCell"><input class="posTabLink" id="popTab" type="button" onclick="openPosPage(event, 'popPage')" value="Pop" /></td>
+						<td class="tabBarCell" id="lockTabCell"><input class="posTabLink" id="lockTab" type="button" onclick="openPosPage(event, 'lockPage')" value="Lock" /></td>
+						<td class="tabBarCell" id="dropTabCell"><input class="posTabLink" id="dropTab" type="button" onclick="openPosPage(event, 'dropPage')" value="Drop" /></td>
+					</tr>
+				</table>
+			</div>
+
+		<!-- Time Derivatives of Position Pages -->
+			<div class="posPage" id="dispPage">
+				<br />
+				<input id="manDist" class="" type="button" onclick="manMove()" value="Move" />
+			</div>
+
+			<div class="posPage" id="veloPage">
+				
+			</div>
+				
+			<div class="posPage" id="accePage">
+				
+			</div>
+				
+			<div class="posPage" id="jerkPage">
+				
+			</div>
+		
+			<div class="posPage" id="snapPage">
+				
+			</div>
+				
+			<div class="posPage" id="cracPage">
+				
+			</div>
+				
+			<div class="posPage" id="popPage">
+				
+			</div>
+				
+			<div class="posPage" id="lockPage">
+				
+			</div>
+				
+			<div class="posPage" id="dropPage">
+				
+			</div>
+		</span>	
+	</div>
+	<!-- Scripts -->
+		<script src="js/tabDisplay.js"></script>
+		<script src="js/OmegaNum.js"></script>
+		<script src="js/gameplay/distance.js"></script>
+		<script src="js/gameplay/milestoneData.js"></script>
+		<script src="js/gameplay/milestoneUnlocks.js"></script>
+		<script src="js/tick.js"></script>
+		<script src="js/gameplay/features.js"></script>
+
+</body>
+</html>
