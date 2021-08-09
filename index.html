@@ -1,111 +1,466 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Stinkremental</title>
-	<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stinkremental v0.3</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-	<div id="game">
-		<!-- Status Bar to show the values of the Derivatives of Position, quantity and gain rate of resources and any other values while in other sections -->
-			<div id="status">
-				Distance Travelled: <span id="xDistance"></span> <span id="xDistanceUnit"></span>
-			</div>
+<div id="game">
 
-		<!-- Tab Bar to swap between the various sections of the game (Alternatively keybinds can be used to navigate the tabs) -->
-			<div id="tabs">
-				<table id="tabBar">
-					<tr>
-						<td class="tabBarCell" id="posTabCell"><input id="posTab" class="mainTabLink" type="button" onclick="openTab(event, 'posContents')" value="Position" /></td>
-						<td class="tabBarCell" id="milestonesTabCell"><input id="milestonesTab" class="mainTabLink" type="button" onclick="openTab(event, 'milestonesContents')" value="Milestones" /></td>
-						<td class="tabBarCell" id="settingsTabCell"><input id="settingsTab" class="mainTabLink" type="button" onclick="openTab(event, 'settingsContents')" value="Settings" /></td>
-						<td class="tabBarCell" id="statsTabCell"><input id="statsTab" class="mainTabLink" type="button" onclick="openTab(event, 'statsContents')" value="Stats" /></td>
-					</tr>
-				</table>
-			</div>
+    <!-- Status Bar -->
+    <div id="statusBar">
 
-		<!-- External Links, Information and Title at bottom of the page -->
-			<div id="info-bar">
+        <div id="xAxisStatus" class="axisStatus">
+            <div id="xAxisTitleStatus" class="axisStatusTitle">x-Axis</div>
+            <span id="xDisplacementStatus" class="derivStatus">Displacement: </span><span class="derivStatusRight"><span id="xDisplacement"></span> m</span><br/>
+            <span id="xVelocityStatus" class="derivStatus">Velocity: </span><span id="derivStatusRightVelocity" class="derivStatusRight"><span id="xVelocity"></span> ms<sup>-1</sup></span><br/>
+            <span id="xAccelerationStatus" class="derivStatus">Acceleration: </span><span id="derivStatusRightAcceleration" class="derivStatusRight"><span id="xAcceleration"></span> ms<sup>-2</sup></span><br/>
+            <span id="xJerkStatus" class="derivStatus">Jerk: </span><span id="derivStatusRightJerk" class="derivStatusRight"><span id="xJerk"></span> ms<sup>-3</sup></span><br/>
+            <span id="xSnapStatus" class="derivStatus">Snap: </span><span id="derivStatusRightSnap" class="derivStatusRight"><span id="xSnap"></span> ms<sup>-4</sup></span><br/>
+            <span id="xCrackleStatus" class="derivStatus">Crackle: </span><span id="derivStatusRightCrackle" class="derivStatusRight"><span id="xCrackle"></span> ms<sup>-5</sup></span><br/>
+            <span id="xPopStatus" class="derivStatus">Pop: </span><span id="derivStatusRightPop" class="derivStatusRight"><span id="xPop"></span> ms<sup>-6</sup></span><br/>
+            <span id="xLockStatus" class="derivStatus">Lock: </span><span id="derivStatusRightLock" class="derivStatusRight"><span id="xLock"></span> ms<sup>-7</sup></span><br/>
+            <span id="xDropStatus" class="derivStatus">Drop: </span><span id="derivStatusRightDrop" class="derivStatusRight"><span id="xDrop"></span> ms<sup>-8</sup></span><br/>
+        </div>
+        <div id="yAxisStatus" class="axisStatus">
+            <div id="yAxisTitleStatus" class="axisStatusTitle">y-Axis</div>
+            <div id="yDisplacementStatus" class="derivStatus">Displacement: </div><div class="derivStatusRight"><span id="yDisplacement"></span> m</div><br/>
+            <div id="yVelocityStatus" class="derivStatus">Velocity: </div><div class="derivStatusRight"><span id="yVelocity"></span> ms<sup>-1</sup></div><br/>
+            <div id="yAccelerationStatus" class="derivStatus">Acceleration: </div><div class="derivStatusRight"><span id="yAcceleration"></span> ms<sup>-2</sup></div><br/>
+            <div id="yJerkStatus" class="derivStatus">Jerk: </div><div class="derivStatusRight"><span id="yJerk"></span> ms<sup>-3</sup></div><br/>
+            <div id="ySnapStatus" class="derivStatus">Snap: </div><div class="derivStatusRight"><span id="ySnap"></span> ms<sup>-4</sup></div><br/>
+            <div id="yCrackleStatus" class="derivStatus">Crackle: </div><div class="derivStatusRight"><span id="yCrackle"></span> ms<sup>-5</sup></div><br/>
+            <div id="yPopStatus" class="derivStatus">Pop: </div><div class="derivStatusRight"><span id="yPop"></span> ms<sup>-6</sup></div><br/>
+            <div id="yLockStatus" class="derivStatus">Lock: </div><div class="derivStatusRight"><span id="yLock"></span> ms<sup>-7</sup></div><br/>
+            <div id="yDropStatus" class="derivStatus">Drop: </div><div class="derivStatusRight"><span id="yDrop"></span> ms<sup>-8</sup></div><br/>
+        </div>
+        <div id="zAxisStatus" class="axisStatus">
+            <div id="zAxisTitleStatus" class="axisStatusTitle">z-Axis</div>
+            <div id="zDisplacementStatus" class="derivStatus">Displacement: </div><div class="derivStatusRight"><span id="zDisplacement"></span> m</div><br/>
+            <div id="zVelocityStatus" class="derivStatus">Velocity: </div><div class="derivStatusRight"><span id="zVelocity"></span> ms<sup>-1</sup></div><br/>
+            <div id="zAccelerationStatus" class="derivStatus">Acceleration: </div><div class="derivStatusRight"><span id="zAcceleration"></span> ms<sup>-2</sup></div><br/>
+            <div id="zJerkStatus" class="derivStatus">Jerk: </div><div class="derivStatusRight"><span id="zJerk"></span> ms<sup>-3</sup></div><br/>
+            <div id="zSnapStatus" class="derivStatus">Snap: </div><div class="derivStatusRight"><span id="zSnap"></span> ms<sup>-4</sup></div><br/>
+            <div id="zCrackleStatus" class="derivStatus">Crackle: </div><div class="derivStatusRight"><span id="zCrackle"></span> ms<sup>-5</sup></div><br/>
+            <div id="zPopStatus" class="derivStatus">Pop: </div><div class="derivStatusRight"><span id="zPop"></span> ms<sup>-6</sup></div><br/>
+            <div id="zLockStatus" class="derivStatus">Lock: </div><div class="derivStatusRight"><span id="zLock"></span> ms<sup>-7</sup></div><br/>
+            <div id="zDropStatus" class="derivStatus">Drop: </div><div class="derivStatusRight"><span id="zDrop"></span> ms<sup>-8</sup></div><br/>
+        </div>
+        <div id="wAxisStatus" class="axisStatus">
+            <div id="wAxisTitleStatus" class="axisStatusTitle">w-Axis</div>
+            <div id="wDisplacementStatus" class="derivStatus">Displacement: </div><div class="derivStatusRight"><span id="wDisplacement"></span> m</div><br/>
+            <div id="wVelocityStatus" class="derivStatus">Velocity: </div><div class="derivStatusRight"><span id="wVelocity"></span> ms<sup>-1</sup></div><br/>
+            <div id="wAccelerationStatus" class="derivStatus">Acceleration: </div><div class="derivStatusRight"><span id="wAcceleration"></span> ms<sup>-2</sup></div><br/>
+            <div id="wJerkStatus" class="derivStatus">Jerk: </div><div class="derivStatusRight"><span id="wJerk"></span> ms<sup>-3</sup></div><br/>
+            <div id="wSnapStatus" class="derivStatus">Snap: </div><div class="derivStatusRight"><span id="wSnap"></span> ms<sup>-4</sup></div><br/>
+            <div id="wCrackleStatus" class="derivStatus">Crackle: </div><div class="derivStatusRight"><span id="wCrackle"></span> ms<sup>-5</sup></div><br/>
+            <div id="wPopStatus" class="derivStatus">Pop: </div><div class="derivStatusRight"><span id="wPop"></span> ms<sup>-6</sup></div><br/>
+            <div id="wLockStatus" class="derivStatus">Lock: </div><div class="derivStatusRight"><span id="wLock"></span> ms<sup>-7</sup></div><br/>
+            <div id="wDropStatus" class="derivStatus">Drop: </div><div class="derivStatusRight"><span id="wDrop"></span> ms<sup>-8</sup></div><br/>
+        </div>
 
-			<!-- Title of the Game -->
-				<div id="title">
-					<h1>Stinkremental</h1>
-					<h5>The Stinky Incremental</h5>
-				</div>
+    </div>
 
+    <!-- Main Tab Bar -->
+    <div id="mainTabBar">
 
-			<!-- Links to various resources and developer socials -->
-				<div id="external-links">
+        <button id="positionTabButton" class="mainTabButton" onclick="openTab(event, 'positionTab')">Position
+        <button id="milestoneTabButton" class="mainTabButton" onclick="openTab(event, 'milestoneTab')">Milestones
+        <button id="statisticsTabButton" class="mainTabButton" onclick="openTab(event, 'statisticsTab')">Stats
+        <button id="settingsTabButton" class="mainTabButton" onclick="openTab(event, 'settingsTab')">Settings
+        <button id="elementTabButton" class="mainTabButton" onclick="openTab(event, 'elementTab')">Elements
 
-				</div>
-			</div>
+    </div>
 
-		<span class="tabContents" id="posContents">
-		<!-- Time Derivatives of Position Tab Bar -->
-			<div id="posBar">
-				<table id="posBarTable">
-					<tr>
-						<td class="tabBarCell" id="dispTabCell"><input class="posTabLink" id="dispTab" type="button" onclick="openPosPage(event, 'dispPage')" value="Displacement" /></td>
-						<td class="tabBarCell" id="veloTabCell"><input class="posTabLink" id="veloTab" type="button" onclick="openPosPage(event, 'veloPage')" value="Velocity" /></td>
-						<td class="tabBarCell" id="acceTabCell"><input class="posTabLink" id="acceTab" type="button" onclick="openPosPage(event, 'accePage')" value="Acceleration" /></td>
-						<td class="tabBarCell" id="jerkTabCell"><input class="posTabLink" id="jerkTab" type="button" onclick="openPosPage(event, 'jerkPage')" value="Jerk" /></td>
-						<td class="tabBarCell" id="snapTabCell"><input class="posTabLink" id="snapTab" type="button" onclick="openPosPage(event, 'snapPage')" value="Snap" /></td>
-						<td class="tabBarCell" id="cracTabCell"><input class="posTabLink" id="cracTab" type="button" onclick="openPosPage(event, 'cracPage')" value="Crackle" /></td>
-						<td class="tabBarCell" id="popTabCell"><input class="posTabLink" id="popTab" type="button" onclick="openPosPage(event, 'popPage')" value="Pop" /></td>
-						<td class="tabBarCell" id="lockTabCell"><input class="posTabLink" id="lockTab" type="button" onclick="openPosPage(event, 'lockPage')" value="Lock" /></td>
-						<td class="tabBarCell" id="dropTabCell"><input class="posTabLink" id="dropTab" type="button" onclick="openPosPage(event, 'dropPage')" value="Drop" /></td>
-					</tr>
-				</table>
-			</div>
+    <!-- Position Tab -->
+    <div id="positionTab" class="mainTab">
 
-		<!-- Time Derivatives of Position Pages -->
-			<div class="posPage" id="dispPage">
-				<br />
-				<input id="manDist" class="" type="button" onclick="manMove()" value="Move" />
-			</div>
+        <!-- Axis Tab Bar -->
+        <div id="axisTabBar" style="display: none;">
+            <button id="xAxisTabButton" class="axisTabButton" onclick="openAxisTab(event, 'xAxisTab')">x-Axis
+            <button id="yAxisTabButton" class="axisTabButton" onclick="openAxisTab(event, 'yAxisTab')">y-Axis
+            <button id="zAxisTabButton" class="axisTabButton" onclick="openAxisTab(event, 'zAxisTab')">z-Axis
+            <button id="wAxisTabButton" class="axisTabButton" onclick="openAxisTab(event, 'wAxisTab')">w-Axis
+        </div>
 
-			<div class="posPage" id="veloPage">
-				
-			</div>
-				
-			<div class="posPage" id="accePage">
-				
-			</div>
-				
-			<div class="posPage" id="jerkPage">
-				
-			</div>
-		
-			<div class="posPage" id="snapPage">
-				
-			</div>
-				
-			<div class="posPage" id="cracPage">
-				
-			</div>
-				
-			<div class="posPage" id="popPage">
-				
-			</div>
-				
-			<div class="posPage" id="lockPage">
-				
-			</div>
-				
-			<div class="posPage" id="dropPage">
-				
-			</div>
-		</span>	
-	</div>
-	<!-- Scripts -->
-		<script src="js/tabDisplay.js"></script>
-		<script src="js/OmegaNum.js"></script>
-		<script src="js/gameplay/distance.js"></script>
-		<script src="js/gameplay/milestoneData.js"></script>
-		<script src="js/gameplay/milestoneUnlocks.js"></script>
-		<script src="js/tick.js"></script>
-		<script src="js/gameplay/features.js"></script>
+        <div id="xAxisTab" class="axisTab">
+
+            <!-- Position Derivative Bar -->
+            <div style="display:none;" id="xPosTabBar">
+
+                <button id="xDisplacementPosTabButton" class="xPosTabButton" onclick="xPosOpenTab(event, 'xDisplacementPosTab')">Displacement
+                <button id="xVelocityPosTabButton" class="xPosTabButton" onclick="xPosOpenTab(event, 'xVelocityPosTab')">Velocity
+                <button style="display:none;" id="xAccelerationPosTabButton" class="xPosTabButton" onclick="xPosOpenTab(event, 'xAccelerationPosTab')">Acceleration
+                <button style="display:none;" id="xJerkPosTabButton" class="xPosTabButton" onclick="xPosOpenTab(event, 'xJerkPosTab')">Jerk
+                <button style="display:none;" id="xSnapPosTabButton" class="xPosTabButton" onclick="xPosOpenTab(event, 'xSnapPosTab')">Snap
+                <button style="display:none;" id="xCracklePosTabButton" class="xPosTabButton" onclick="xPosOpenTab(event, 'xCracklePosTab')">Crackle
+                <button style="display:none;" id="xPopPosTabButton" class="xPosTabButton" onclick="xPosOpenTab(event, 'xPopPosTab')">Pop
+                <button style="display:none;" id="xLockPosTabButton" class="xPosTabButton" onclick="xPosOpenTab(event, 'xLockPosTab')">Lock
+                <button style="display:none;" id="xDropPosTabButton" class="xPosTabButton" onclick="xPosOpenTab(event, 'xDropPosTab')">Drop
+
+            </div>
+
+            <!-- Axis Tabs -->
+            <div id="xDisplacementPosTab" class="xPosTab">
+                <button id="xDisplacementMoveButton" class="derivativeTabButton" onclick="displacementClick('x')">Move</button>
+            </div>
+            <div id="xVelocityPosTab" class="xPosTab">
+                <button id="xVelocityPrestigeButton" class="derivativeTabButton" onclick="velocityReset('x')">Prestige for <span id="xVelocityOnPrestige"></span> ms<sup>-1</sup></button>
+            </div>
+            <div id="xAccelerationPosTab" class="xPosTab">
+                <button id="xAccelerationPrestigeButton" class="derivativeTabButton" onclick="accelerationReset('x')">Prestige for <span id="xAccelerationOnPrestige"></span> ms<sup>-2</sup></button>
+            </div>
+            <div id="xJerkPosTab" class="xPosTab">
+                <button id="xJerkPrestigeButton" class="derivativeTabButton" onclick="jerkReset('x')">Prestige for <span id="xJerkOnPrestige"></span> ms<sup>-3</sup></button>
+            </div>
+            <div id="xSnapPosTab" class="xPosTab">
+                <button id="xSnapPrestigeButton" class="derivativeTabButton" onclick="snapReset('x')">Prestige for <span id="xSnapOnPrestige"></span> ms<sup>-4</sup></button>
+            </div>
+            <div id="xCracklePosTab" class="xPosTab">
+                <button id="xCracklePrestigeButton" class="derivativeTabButton" onclick="crackleReset('x')">Prestige for <span id="xCrackleOnPrestige"></span> ms<sup>-5</sup></button>
+            </div>
+            <div id="xPopPosTab" class="xPosTab">
+                <button id="xPopPrestigeButton" class="derivativeTabButton" onclick="popReset('x')">Prestige for <span id="xPopOnPrestige"></span> ms<sup>-6</sup></button>
+            </div>
+            <div id="xLockPosTab" class="xPosTab">
+                <button id="xLockPrestigeButton" class="derivativeTabButton" onclick="lockReset('x')">Prestige for <span id="xLockOnPrestige"></span> ms<sup>-7</sup></button>
+            </div>
+            <div id="xDropPosTab" class="xPosTab">
+                <button id="xDropPrestigeButton" class="derivativeTabButton" onclick="dropReset('x')">Prestige for <span id="xDropOnPrestige"></span> ms<sup>-8</sup></button>
+            </div>
+
+        </div>
+        <div id="yAxisTab" class="axisTab">
+
+            <!-- Position Derivative Bar -->
+            <div style="display:none;" id="yPosTabBar">
+
+                <button id="yDisplacementPosTabButton" class="yPosTabButton" onclick="yPosOpenTab(event, 'yDisplacementPosTab')">Displacement
+                <button id="yVelocityPosTabButton" class="yPosTabButton" onclick="yPosOpenTab(event, 'yVelocityPosTab')">Velocity
+                <button style="display:none;" id="yAccelerationPosTabButton" class="yPosTabButton" onclick="yPosOpenTab(event, 'yAccelerationPosTab')">Acceleration
+                <button style="display:none;" id="yJerkPosTabButton" class="yPosTabButton" onclick="yPosOpenTab(event, 'yJerkPosTab')">Jerk
+                <button style="display:none;" id="ySnapPosTabButton" class="yPosTabButton" onclick="yPosOpenTab(event, 'ySnapPosTab')">Snap
+                <button style="display:none;" id="yCracklePosTabButton" class="yPosTabButton" onclick="yPosOpenTab(event, 'yCracklePosTab')">Crackle
+                <button style="display:none;" id="yPopPosTabButton" class="yPosTabButton" onclick="yPosOpenTab(event, 'yPopPosTab')">Pop
+                <button style="display:none;" id="yLockPosTabButton" class="yPosTabButton" onclick="yPosOpenTab(event, 'yLockPosTab')">Lock
+                <button style="display:none;" id="yDropPosTabButton" class="yPosTabButton" onclick="yPosOpenTab(event, 'yDropPosTab')">Drop
+
+            </div>
+
+            <!-- Axis Tabs -->
+            <div id="yDisplacementPosTab" class="yPosTab">
+                <button id="yDisplacementMoveButton" class="derivativeTabButton" onclick="displacementClick('y')">Move</button>
+            </div>
+            <div id="yVelocityPosTab" class="yPosTab">
+                <button id="yVelocityPrestigeButton" class="derivativeTabButton" onclick="velocityReset('y')">Prestige for <span id="yVelocityOnPrestige"></span> ms<sup>-1</sup></button>
+            </div>
+            <div id="yAccelerationPosTab" class="yPosTab">
+                <button id="yAccelerationPrestigeButton" class="derivativeTabButton" onclick="accelerationReset('y')">Prestige for <span id="yAccelerationOnPrestige"></span> ms<sup>-2</sup></button>
+            </div>
+            <div id="yJerkPosTab" class="yPosTab">
+                <button id="yJerkPrestigeButton" class="derivativeTabButton" onclick="jerkReset('y')">Prestige for <span id="yJerkOnPrestige"></span> ms<sup>-3</sup></button>
+            </div>
+            <div id="ySnapPosTab" class="yPosTab">
+                <button id="ySnapPrestigeButton" class="derivativeTabButton" onclick="snapReset('y')">Prestige for <span id="ySnapOnPrestige"></span> ms<sup>-4</sup></button>
+            </div>
+            <div id="yCracklePosTab" class="yPosTab">
+                <button id="yCracklePrestigeButton" class="derivativeTabButton" onclick="crackleReset('y')">Prestige for <span id="yCrackleOnPrestige"></span> ms<sup>-5</sup></button>
+            </div>
+            <div id="yPopPosTab" class="yPosTab">
+                <button id="yPopPrestigeButton" class="derivativeTabButton" onclick="popReset('y')">Prestige for <span id="yPopOnPrestige"></span> ms<sup>-6</sup></button>
+            </div>
+            <div id="yLockPosTab" class="yPosTab">
+                <button id="yLockPrestigeButton" class="derivativeTabButton" onclick="lockReset('y')">Prestige for <span id="yLockOnPrestige"></span> ms<sup>-7</sup></button>
+            </div>
+            <div id="yDropPosTab" class="yPosTab">
+                <button id="yDropPrestigeButton" class="derivativeTabButton" onclick="dropReset('y')">Prestige for <span id="yDropOnPrestige"></span> ms<sup>-8</sup></button>
+            </div>
+
+        </div>
+        <div id="zAxisTab" class="axisTab">
+
+            <!-- Position Derivative Bar -->
+            <div style="display:none;" id="zPosTabBar">
+
+                <button id="zDisplacementPosTabButton" class="zPosTabButton" onclick="zPosOpenTab(event, 'zDisplacementPosTab')">Displacement
+                <button id="zVelocityPosTabButton" class="zPosTabButton" onclick="zPosOpenTab(event, 'zVelocityPosTab')">Velocity
+                <button style="display:none;" id="zAccelerationPosTabButton" class="zPosTabButton" onclick="zPosOpenTab(event, 'zAccelerationPosTab')">Acceleration
+                <button style="display:none;" id="zJerkPosTabButton" class="zPosTabButton" onclick="zPosOpenTab(event, 'zJerkPosTab')">Jerk
+                <button style="display:none;" id="zSnapPosTabButton" class="zPosTabButton" onclick="zPosOpenTab(event, 'zSnapPosTab')">Snap
+                <button style="display:none;" id="zCracklePosTabButton" class="zPosTabButton" onclick="zPosOpenTab(event, 'zCracklePosTab')">Crackle
+                <button style="display:none;" id="zPopPosTabButton" class="zPosTabButton" onclick="zPosOpenTab(event, 'zPopPosTab')">Pop
+                <button style="display:none;" id="zLockPosTabButton" class="zPosTabButton" onclick="zPosOpenTab(event, 'zLockPosTab')">Lock
+                <button style="display:none;" id="zDropPosTabButton" class="zPosTabButton" onclick="zPosOpenTab(event, 'zDropPosTab')">Drop
+
+            </div>
+
+            <!-- Axis Tabs -->
+            <div id="zDisplacementPosTab" class="zPosTab">
+                <button id="zDisplacementMoveButton" class="derivativeTabButton" onclick="displacementClick('z')">Move</button>
+            </div>
+            <div id="zVelocityPosTab" class="zPosTab">
+                <button id="zVelocityPrestigeButton" class="derivativeTabButton" onclick="velocityReset('z')">Prestige for <span id="zVelocityOnPrestige"></span> ms<sup>-1</sup></button>
+            </div>
+            <div id="zAccelerationPosTab" class="zPosTab">
+                <button id="zAccelerationPrestigeButton" class="derivativeTabButton" onclick="accelerationReset('z')">Prestige for <span id="zAccelerationOnPrestige"></span> ms<sup>-2</sup></button>
+            </div>
+            <div id="zJerkPosTab" class="zPosTab">
+                <button id="zJerkPrestigeButton" class="derivativeTabButton" onclick="jerkReset('z')">Prestige for <span id="zJerkOnPrestige"></span> ms<sup>-3</sup></button>
+            </div>
+            <div id="zSnapPosTab" class="zPosTab">
+                <button id="zSnapPrestigeButton" class="derivativeTabButton" onclick="snapReset('z')">Prestige for <span id="zSnapOnPrestige"></span> ms<sup>-4</sup></button>
+            </div>
+            <div id="zCracklePosTab" class="zPosTab">
+                <button id="zCracklePrestigeButton" class="derivativeTabButton" onclick="crackleReset('z')">Prestige for <span id="zCrackleOnPrestige"></span> ms<sup>-5</sup></button>
+            </div>
+            <div id="zPopPosTab" class="zPosTab">
+                <button id="zPopPrestigeButton" class="derivativeTabButton" onclick="popReset('z')">Prestige for <span id="zPopOnPrestige"></span> ms<sup>-6</sup></button>
+            </div>
+            <div id="zLockPosTab" class="zPosTab">
+                <button id="zLockPrestigeButton" class="derivativeTabButton" onclick="lockReset('z')">Prestige for <span id="zLockOnPrestige"></span> ms<sup>-7</sup></button>
+            </div>
+            <div id="zDropPosTab" class="zPosTab">
+                <button id="zDropPrestigeButton" class="derivativeTabButton" onclick="dropReset('z')">Prestige for <span id="zDropOnPrestige"></span> ms<sup>-8</sup></button>
+            </div>
+
+        </div>
+        <div id="wAxisTab" class="axisTab">
+
+            <!-- Position Derivative Bar -->
+            <div style="display:none;" id="wPosTabBar">
+
+                <button id="wDisplacementPosTabButton" class="wPosTabButton" onclick="wPosOpenTab(event, 'wDisplacementPosTab')">Displacement
+                <button id="wVelocityPosTabButton" class="wPosTabButton" onclick="wPosOpenTab(event, 'wVelocityPosTab')">Velocity
+                <button style="display:none;" id="wAccelerationPosTabButton" class="wPosTabButton" onclick="wPosOpenTab(event, 'wAccelerationPosTab')">Acceleration
+                <button style="display:none;" id="wJerkPosTabButton" class="wPosTabButton" onclick="wPosOpenTab(event, 'wJerkPosTab')">Jerk
+                <button style="display:none;" id="wSnapPosTabButton" class="wPosTabButton" onclick="wPosOpenTab(event, 'wSnapPosTab')">Snap
+                <button style="display:none;" id="wCracklePosTabButton" class="wPosTabButton" onclick="wPosOpenTab(event, 'wCracklePosTab')">Crackle
+                <button style="display:none;" id="wPopPosTabButton" class="wPosTabButton" onclick="wPosOpenTab(event, 'wPopPosTab')">Pop
+                <button style="display:none;" id="wLockPosTabButton" class="wPosTabButton" onclick="wPosOpenTab(event, 'wLockPosTab')">Lock
+                <button style="display:none;" id="wDropPosTabButton" class="wPosTabButton" onclick="wPosOpenTab(event, 'wDropPosTab')">Drop
+
+            </div>
+
+            <!-- Axis Tabs -->
+            <div id="wDisplacementPosTab" class="wPosTab">
+                <button id="wDisplacementMoveButton" class="derivativeTabButton" onclick="displacementClick('w')">Move</button>
+            </div>
+            <div id="wVelocityPosTab" class="wPosTab">
+                <button id="wVelocityPrestigeButton" class="derivativeTabButton" onclick="velocityReset('w')">Prestige for <span id="wVelocityOnPrestige"></span> ms<sup>-1</sup></button>
+            </div>
+            <div id="wAccelerationPosTab" class="wPosTab">
+                <button id="wAccelerationPrestigeButton" class="derivativeTabButton" onclick="accelerationReset('w')">Prestige for <span id="wAccelerationOnPrestige"></span> ms<sup>-2</sup></button>
+            </div>
+            <div id="wJerkPosTab" class="wPosTab">
+                <button id="wJerkPrestigeButton" class="derivativeTabButton" onclick="jerkReset('w')">Prestige for <span id="wJerkOnPrestige"></span> ms<sup>-3</sup></button>
+            </div>
+            <div id="wSnapPosTab" class="wPosTab">
+                <button id="wSnapPrestigeButton" class="derivativeTabButton" onclick="snapReset('w')">Prestige for <span id="wSnapOnPrestige"></span> ms<sup>-4</sup></button>
+            </div>
+            <div id="wCracklePosTab" class="wPosTab">
+                <button id="wCracklePrestigeButton" class="derivativeTabButton" onclick="crackleReset('w')">Prestige for <span id="wCrackleOnPrestige"></span> ms<sup>-5</sup></button>
+            </div>
+            <div id="wPopPosTab" class="wPosTab">
+                <button id="wPopPrestigeButton" class="derivativeTabButton" onclick="popReset('w')">Prestige for <span id="wPopOnPrestige"></span> ms<sup>-6</sup></button>
+            </div>
+            <div id="wLockPosTab" class="wPosTab">
+                <button id="wLockPrestigeButton" class="derivativeTabButton" onclick="lockReset('w')">Prestige for <span id="wLockOnPrestige"></span> ms<sup>-7</sup></button>
+            </div>
+            <div id="wDropPosTab" class="wPosTab">
+                <button id="wDropPrestigeButton" class="derivativeTabButton" onclick="dropReset('w')">Prestige for <span id="wDropOnPrestige"></span> ms<sup>-8</sup></button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Milestones Tab -->
+    <div id="milestoneTab" class="mainTab">
+
+        <h3 style="text-align: center;">Milestones</h3>
+        <br/>
+
+        <!-- Milestone Sections -->
+
+    </div>
+
+    <!-- Stats Tab -->
+    <div id="statisticsTab" class="mainTab">
+    </div>
+
+    <!-- Settings Tab -->
+    <div id="settingsTab" class="mainTab">
+    </div>
+
+    <!-- Elements Tab -->
+    <div id="elementTab" class="mainTab">
+        <h3 style="text-align: center;">Element Storage</h3>
+        <table id="elementTable">
+                <tr id="elementTableRow">
+                    <td>
+                        [1] Hydrogen (H): <span id="playerStoredHydrogen"></span><br/>
+                        [2] Helium (He): <span id="playerStoredHelium"></span><br/>
+                        [3] Lithium (Li): <span id="playerStoredLithium"></span><br/>
+                        [4] Beryllium (Be): <span id="playerStoredBeryllium"></span><br/>
+                        [5] Boron (B): <span id="playerStoredBoron"></span><br/>
+                        [6] Carbon (C): <span id="playerStoredCarbon"></span><br/>
+                        [7] Nitrogen (N): <span id="playerStoredNitrogen"></span><br/>
+                        [8] Oxygen (O): <span id="playerStoredOxygen"></span><br/>
+                        [9] Fluorine (F): <span id="playerStoredFluorine"></span><br/>
+                        [10] Neon (Ne): <span id="playerStoredNeon"></span><br/>
+                        [11] Sodium (Na): <span id="playerStoredSodium"></span><br/>
+                        [12] Magnesium (Mg): <span id="playerStoredMagnesium"></span><br/>
+                        [13] Aluminium (Al): <span id="playerStoredAluminium"></span><br/>
+                        [14] Silicon (Si): <span id="playerStoredSilicon"></span><br/>
+                        [15] Phosphorus (P): <span id="playerStoredPhosphorus"></span><br/>
+                        [16] Sulfur (S): <span id="playerStoredSulfur"></span><br/>
+                        [17] Chlorine (Cl): <span id="playerStoredChlorine"></span><br/>
+                        [18] Argon (Ar): <span id="playerStoredArgon"></span><br/>
+                        [19] Potassium (K): <span id="playerStoredPotassium"></span><br/>
+                        [20] Calcium (Ca): <span id="playerStoredCalcium"></span><br/>
+                        [21] Scandium (Sc): <span id="playerStoredScandium"></span><br/>
+                        [22] Titanium (Ti): <span id="playerStoredTitanium"></span><br/>
+                        [23] Vanadium (V): <span id="playerStoredVanadium"></span><br/>
+                        [24] Chromium (Cr): <span id="playerStoredChromium"></span><br/>
+                        [25] Manganese (Mn): <span id="playerStoredManganese"></span><br/>
+                        [26] Iron (Fe): <span id="playerStoredIron"></span><br/>
+                        [27] Cobalt (Co): <span id="playerStoredCobalt"></span><br/>
+                        [28] Nickel (Ni): <span id="playerStoredNickel"></span><br/>
+                        [29] Copper (Cu): <span id="playerStoredCopper"></span><br/>
+                        [30] Zinc (Zn): <span id="playerStoredZinc"></span><br/>
+                        [31] Gallium (Ga): <span id="playerStoredGallium"></span><br/>
+                        [32] Germanium (Ge): <span id="playerStoredGermanium"></span><br/>
+                        [33] Arsenic (As): <span id="playerStoredArsenic"></span><br/>
+                        [34] Selenium (Se): <span id="playerStoredSelenium"></span><br/>
+                        [35] Bromine (Br): <span id="playerStoredBromine"></span><br/>
+                        [36] Krypton (Kr): <span id="playerStoredKrypton"></span><br/>
+                        [37] Rubidium (Rb): <span id="playerStoredRubidium"></span><br/>
+                        [38] Strontium (Sr): <span id="playerStoredStrontium"></span><br/>
+                        [39] Yttrium (Y): <span id="playerStoredYttrium"></span><br/>
+                        [40] Zirconium (Zr): <span id="playerStoredZirconium"></span>
+                    </td>
+                    <td>
+                        [41] Niobium (Nb): <span id="playerStoredNiobium"></span><br/>
+                        [42] Molybdenum (Mo): <span id="playerStoredMolybdenum"></span><br/>
+                        [43] Technetium (Tc): <span id="playerStoredTechnetium"></span><br/>
+                        [44] Ruthenium (Ru): <span id="playerStoredRuthenium"></span><br/>
+                        [45] Rhodium (Rh): <span id="playerStoredRhodium"></span><br/>
+                        [46] Palladium (Pd): <span id="playerStoredPalladium"></span><br/>
+                        [47] Silver (Ag): <span id="playerStoredSilver"></span><br/>
+                        [48] Cadmium (Cd): <span id="playerStoredCadmium"></span><br/>
+                        [49] Indium (In): <span id="playerStoredIndium"></span><br/>
+                        [50] Tin (Sn): <span id="playerStoredTin"></span><br/>
+                        [51] Antimony (Sb): <span id="playerStoredAntimony"></span><br/>
+                        [52] Tellurium (Te): <span id="playerStoredTellurium"></span><br/>
+                        [53] Iodine (I): <span id="playerStoredIodine"></span><br/>
+                        [54] Xenon (Xe): <span id="playerStoredXenon"></span><br/>
+                        [55] Cesium (Cs): <span id="playerStoredCesium"></span><br/>
+                        [56] Barium (Ba): <span id="playerStoredBarium"></span><br/>
+                        [57] Lanthanum (La): <span id="playerStoredLanthanum"></span><br/>
+                        [58] Cerium (Ce): <span id="playerStoredCerium"></span><br/>
+                        [59] Praseodymium (Pr): <span id="playerStoredPraseodymium"></span><br/>
+                        [60] Neodymium (Nd): <span id="playerStoredNeodymium"></span><br/>
+                        [61] Promethium (Pm): <span id="playerStoredPromethium"></span><br/>
+                        [62] Samarium (Sm): <span id="playerStoredSamarium"></span><br/>
+                        [63] Europium (Eu): <span id="playerStoredEuropium"></span><br/>
+                        [64] Gadolinium (Gd): <span id="playerStoredGadolinium"></span><br/>
+                        [65] Terbium (Tb): <span id="playerStoredTerbium"></span><br/>
+                        [66] Dysprosium (Dy): <span id="playerStoredDysprosium"></span><br/>
+                        [67] Holmium (Ho): <span id="playerStoredHolmium"></span><br/>
+                        [68] Erbium (Er): <span id="playerStoredErbium"></span><br/>
+                        [69] Thulium (Tm): <span id="playerStoredThulium"></span><br/>
+                        [70] Ytterbium (Yb): <span id="playerStoredYtterbium"></span><br/>
+                        [71] Lutetium (Lu): <span id="playerStoredLutetium"></span><br/>
+                        [72] Hafnium (Hf): <span id="playerStoredHafnium"></span><br/>
+                        [73] Tantalum (Ta): <span id="playerStoredTantalum"></span><br/>
+                        [74] Tungsten (W): <span id="playerStoredTungsten"></span><br/>
+                        [75] Rhenium (Re): <span id="playerStoredRhenium"></span><br/>
+                        [76] Osmium (Os): <span id="playerStoredOsmium"></span><br/>
+                        [77] Iridium (Ir): <span id="playerStoredIridium"></span><br/>
+                        [78] Platinum (Pt): <span id="playerStoredPlatinum"></span><br/>
+                        [79] Gold (Au): <span id="playerStoredGold"></span><br/>
+                        [80] Mercury (Hg): <span id="playerStoredMercury"></span>
+                    </td>
+                    <td>
+                        [81] Thalium (Tl): <span id="playerStoredThalium"></span><br/>
+                        [82] Lead (Pb): <span id="playerStoredLead"></span><br/>
+                        [83] Bismuth (Bi): <span id="playerStoredBismuth"></span><br/>
+                        [84] Polonium (Po): <span id="playerStoredPolonium"></span><br/>
+                        [85] Astatine (At): <span id="playerStoredAstatine"></span><br/>
+                        [86] Radon (Rn): <span id="playerStoredRadon"></span><br/>
+                        [87] Francium (Fr): <span id="playerStoredFrancium"></span><br/>
+                        [88] Radium (Ra): <span id="playerStoredRadium"></span><br/>
+                        [89] Actinium (Ac): <span id="playerStoredActinium"></span><br/>
+                        [90] Thorium (Th): <span id="playerStoredThorium"></span><br/>
+                        [91] Protactinium (Pa): <span id="playerStoredProtactinium"></span><br/>
+                        [92] Uranium (U): <span id="playerStoredUranium"></span><br/>
+                        [93] Neptunium (Np): <span id="playerStoredNeptunium"></span><br/>
+                        [94] Plutonium (Pu): <span id="playerStoredPlutonium"></span><br/>
+                        [95] Americum (Am): <span id="playerStoredAmericum"></span><br/>
+                        [96] Curium (Cm): <span id="playerStoredCurium"></span><br/>
+                        [97] Berkelium (Bk): <span id="playerStoredBerkelium"></span><br/>
+                        [98] Californium (Cf): <span id="playerStoredCalifornium"></span><br/>
+                        [99] Einsteinium (Es): <span id="playerStoredEinsteinium"></span><br/>
+                        [100] Fermium (Fm): <span id="playerStoredFermium"></span><br/>
+                        [101] Mendelevium (Md): <span id="playerStoredMendelevium"></span><br/>
+                        [102] Nobelium (No): <span id="playerStoredNobelium"></span><br/>
+                        [103] Lawrencium (Lr): <span id="playerStoredLawrencium"></span><br/>
+                        [104] Rutherfordium (Rf): <span id="playerStoredRutherfordium"></span><br/>
+                        [105] Dubnium (Db): <span id="playerStoredDubnium"></span><br/>
+                        [106] Seaborgium (Sg): <span id="playerStoredSeaborgium"></span><br/>
+                        [107] Bohrium (Bh): <span id="playerStoredBohrium"></span><br/>
+                        [108] Hassium (Hs): <span id="playerStoredHassium"></span><br/>
+                        [109] Meitnerium (Mt): <span id="playerStoredMeitnerium"></span><br/>
+                        [110] Darmstadtium (Ds): <span id="playerStoredDarmstadtium"></span><br/>
+                        [111] Roentgenium (Rg): <span id="playerStoredRoentgenium"></span><br/>
+                        [112] Copernicium (Cn): <span id="playerStoredCopernicium"></span><br/>
+                        [113] Nihonium (Nh): <span id="playerStoredNihonium"></span><br/>
+                        [114] Flerovium (Fl): <span id="playerStoredFlerovium"></span><br/>
+                        [115] Moscovium (Mc): <span id="playerStoredMoscovium"></span><br/>
+                        [116] Livermorium (Lv): <span id="playerStoredLivermorium"></span><br/>
+                        [117] Tennessine (Ts): <span id="playerStoredTennessine"></span><br/>
+                        [118] Oganesson (Og): <span id="playerStoredOganesson"></span>
+                    </td>
+                </tr>
+        </table>
+    </div>
+
+    <!-- Footer Bar -->
+    <div id="footerBar" style="display:none;">
+
+        <div id="externalLinks">
+
+        </div>
+
+        <div id="title">
+
+            <h1>Stinkremental</h1>
+            <h5>The Stinky Incremental</h5>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- JavaScript References -->
+<script src="js/lib/jquery.js"></script>
+<script src="js/lib/notify.js"></script>
+<script src="js/lib/OmegaNum.js"></script>
+<script src="js/main/position/xAxis.js"></script>
+<script src="js/main/position/yAxis.js"></script>
+<script src="js/main/position/zAxis.js"></script>
+<script src="js/main/position/wAxis.js"></script>
+<script src="js/main/position/axis.js"></script>
+<script src="js/main/features.js"></script>
+<script src="js/main/tick.js"></script>
+<script src="js/main/resources/elements.js"></script>
+<script src="js/main/tabDisplay.js"></script>
+<script src="js/main/milestones/milestoneData.js"></script>
+<script src="js/main/milestones/milestoneUnlocks.js"></script>
 
 </body>
 </html>

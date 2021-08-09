@@ -1,0 +1,10 @@
+var yDisplacement = new OmegaNum(0);
+var yVelocity = new OmegaNum(0);
+var yAcceleration = new OmegaNum(0);
+var yJerk = new OmegaNum(0);
+var ySnap = new OmegaNum(0);
+var yCrackle = new OmegaNum(0);
+var yPop = new OmegaNum(0);
+var yLock = new OmegaNum(0);
+var yDrop = new OmegaNum(0);
+var yMovementIncrement = new OmegaNum(1);
