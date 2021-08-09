@@ -1,139 +1,190 @@
-/* Overall Styling */
-#game{
-	font-family: "Courier New", monospace;
-	font-size: 14px;
+#game {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
 }
 
-/* Status Bar */
-#status{
-	width: auto;
-	padding: 10px;
-	text-align: center;
-	border: 1px solid black;
-	margin: 5px;
+#statusBar {
+    width: auto;
+    padding: 1px;
+    padding-left: 5px;
+    margin: 1px;
+    border: 1px solid black;
 }
 
-/* Info Bar */
-#info-bar{
-	position: fixed;
-	right: 1px;
-	bottom: 1px;
-	left: 1px;
-	margin: 0px;
-	border: 1px double black;
+.derivStatus {
+    line-height: 0;
+    display: inline;
 }
 
-#title{
-	position: relative;
-	right: 5px;
-	text-align: right;
-	line-height: 0px;
-	padding: 0px;
-	margin: 0px;
-	
+.derivStatusRight {
+    width:auto;
+    margin-left: auto;
+    display: inline;
+    text-align: right;
 }
 
-#external-links{
-	position: relative;
-	left: 20px;
-	text-align: left;
-	line-height: 0px;
-	padding: 0px;
-	margin: 0px;
+#xAxisStatus {
+    width: 25%;
 }
 
-/* Position Tab Bar */
-#posBarTable{
-	margin-left: auto;
-	margin-right: auto;
-	width: 50%;
+.axisStatus {
+    width: 24%;
+    margin: 0;
+    border: 0;
+    border-right: 1px solid black;
+    display: inline-block;
 }
 
-.posTabLink {
-	text-decoration: none;
-	text-align: center;
-	display: inline-block;
-	background-color: #FFFFFF;
-	height: 100%;
-	width:100px;
-	padding: 0px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 0;
-	margin-bottom: 0;
-	border: 1px solid black;
+#wAxisStatus {
+    border: 0;
 }
 
-.posTabLink:hover{
-	background-color: #EEEEEE;
+.axisStatusTitle {
+    font-weight: bolder;
+    text-align: center;
 }
 
-.posTabLink:active{
-	background-color: #DDDDDD;
+#mainTabBar {
+    margin: 1px;
+    background-color: lightgrey;
+    border: 1px solid black;
+    text-align: center;
 }
 
-/* Position Pages */
-.posPage{
-	display: none;
+.mainTabButton {
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    width: 100px;
+    margin: 1px;
+    display: inline-block;
 }
 
-#posContents{
-	display: none;
+.mainTabButton:hover {
+    border: 1px solid blue;
 }
 
-.posPage input {
-	text-decoration: none;
-	background-color: white;
-	display: inline-block;
+.mainTabButton:active {
+    border: 1px solid blue;
+    color: blue;
 }
 
-/* Main Tab Bar */
-.mainTabLink {
-	border: 1px solid white;
-	color: white;
-	text-decoration: none;
-	text-align: center;
-	text-decoration-color: #FFFFFF;
-	display: inline-block;
-	background-color: #000000;
-	height: 100%;
-	width: 100px;
-	padding: 0px;
-	margin: 0px;
+.activeTab {
+    border: 1px solid red;
+    color: red;
 }
 
-#tabs{
-	width: auto;
-	text-align: center;
-	padding: 0px;
-	background-color: lightgray;
-	margin: 0px;
-	border: 1px dashed black;
+#xPosTabBar, #yPosTabBar, #zPosTabBar, #wPosTabBar {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 75%;
 }
 
-.mainTabLink:hover{
-	border: 1px solid blue;
+.xPosTabButton, .yPosTabButton, .zPosTabButton, .wPosTabButton {
+    text-decoration: none;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 8%;
+    margin-left: 1px;
+    margin-right: 1px;
+    width: 100px;
 }
 
-.mainTabLink:active{
-	background-color: #333333;
+.xPosTabButton:hover, .yPosTabButton:hover, .zPosTabButton:hover, .wPosTabButton:hover {
+    background-color: #EEE;
 }
 
-#tabBar{
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 0;
-	margin-bottom: 0;	
+.xPosTabButton:active, .yPosTabButton:active, .zPosTabButton:active, .wPosTabButton:active {
+    background-color: #DDD;
 }
 
-#dispTab, #veloTab, #acceTab, #jerkTab, #snapTab, #cracTab, #popTab, #lockTab, #dropTab, #milestonesTab{
-	display: none;
+.xActivePosTab, .yActivePosTab, .zActivePosTab, .wActivePosTab {
+    font-weight: 700;
+    border: 2px solid black;
 }
 
-.tabBarCell {
-	display: none;
+#footerBar {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: block;
+    margin: 1px;
+    border: 1px solid black;
+    padding: 0;
+    background-color: white;
 }
 
-#posTabCell, #statsTabCell, #settingsTabCell {
-	display: table-cell;
+#title {
+    position: relative;
+    right: 5px;
+    text-align: right;
+    display: block;
+    line-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.derivativeTabButton {
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    background-color: white;
+    border: 2px outset;
+    display: block;
+}
+
+.derivativeTabButton:hover {
+    background-color: #EEE;
+}
+
+.derivativeTabButton:active {
+    background-color: #DDD;
+}
+
+#elementTable {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    text-align: left;
+    width: 80%;
+    height: 100%;
+    position: relative;
+    top:0px;
+    bottom: 0px;
+    border-collapse: collapse;
+}
+
+#elementTableRow {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    bottom: 0;
+}
+
+#elementTableRow td{
+    margin: none;
+    width: 33%;
+    height: 100%;
+    border: 1px solid black;
+    line-height: auto;
+    padding:10px;
+    vertical-align: top;
+}
+
+#elementTab {
+    position: relative;
+    top: 0px;
+    bottom: 0px;
+}
+
+#yAxisStatus, #zAxisStatus, #wAxisStatus, #xAxisTitleStatus, #xVelocityStatus, #xAccelerationStatus, #xJerkStatus, #xSnapStatus, #xCrackleStatus, #xPopStatus, #xLockStatus, #xDropStatus, #derivStatusRightVelocity, #derivStatusRightAcceleration, #derivStatusRightJerk, #derivStatusRightSnap, #derivStatusRightCrackle, #derivStatusRightPop, #derivStatusRightLock, #derivStatusRightDrop {
+    visibility:hidden;
+}
+
+#elementTabButton {
+    display:none;
 }
