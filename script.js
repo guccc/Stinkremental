@@ -6,8 +6,8 @@ function tick() {
     var high = screen.height;
     var s = 602*Math.random()*3;
     var r = Math.floor(Math.random()*360);
-    var x = Math.floor(Math.random()*wid);
-    var y = Math.floor(Math.random()*high);
+    var x = Math.floor(Math.random()*wid)-602;
+    var y = Math.floor(Math.random()*high)-602;
 
     if (x>(wid+602)) x = x - 602;
     if (y>(high+602)) y = y - 602;
